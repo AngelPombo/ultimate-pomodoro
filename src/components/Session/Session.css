@@ -1,6 +1,6 @@
 .session-section{
     font-family: "Poetsen One", sans-serif;
-    background-image: url(../../../public/pomodoromobile.jpg);
+    background-image: url(/pomodoromobile.jpg);
     background-size:cover;
     background-position: 30%;
     height: 100vh;
@@ -82,3 +82,16 @@
     margin-top: 0.5rem;
     align-items: center;
 }
+
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+  }
+  
+  .shake {
+    animation: shake 0.5s linear infinite;
+  }

@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import "../Session/Session.css"
+import "../Session/Session.css";
+import alarm from "../../assets/alarm.mp3"
 
 function Session() {
   const [time, setTime] = useState(1500);
-  const [finished, setFinished] = useState(false)
+  const [finished, setFinished] = useState(false);
+  const [shake, setShake] = useState(false);
   const intervalRef = useRef(null);
+  const audioRef = useRef(null);
 
   function startTimer() {
     if (intervalRef.current !== null) return; 
@@ -42,10 +45,20 @@ function Session() {
       setFinished(true);
       setTime(300);
       stopTimer();
+      setShake(true);
+      if (audioRef.current) {
+        audioRef.current.play();
+      }
+      setTimeout(() => setShake(false), 3500)
     } else if( time === 0 && finished == true){
       setFinished(false);
       setTime(1500);
       stopTimer();
+      setShake(true);
+      if (audioRef.current) {
+        audioRef.current.play();
+      }
+      setTimeout(() => setShake(false), 3500)
     }
   }, [time]);
 
@@ -57,10 +70,11 @@ function Session() {
 
   return (
     <section className='session-section'>
+      <audio ref={audioRef} src={alarm} />
       <h1 className='session-h1'>Ultimate Pomodoro</h1>
       { finished 
         ?
-        <article className='break-article'>
+        <article className={`break-article ${shake ? 'shake break-article' : ''}`}>
           <h2>Time to Break!</h2>
           <h4 className='session-timer'>{formatTime(time)}</h4>
           <div className='btn-div'>
@@ -77,7 +91,7 @@ function Session() {
           </div>
         </article>
         :
-        <article className='session-article'>
+        <article className={`session-article ${shake ? 'shake session-article' : ''}`}>
           <h2>Study Time!</h2>
           <div className='session-div'>
             <h4 className='session-timer'>{formatTime(time)}</h4>
