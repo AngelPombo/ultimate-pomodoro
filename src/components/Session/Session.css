@@ -75,6 +75,17 @@
     margin-top: 0.5rem;
 }
 
+.skip-btn{
+    font-family: "Poetsen One", sans-serif;
+    background-color: #5A3B37;
+    padding: 0.4rem;
+    border: 1px solid #DD6564;
+    border-radius: 10px;
+    width: 3rem;
+    color: #DD6564;
+    margin-top: 0.5rem;
+}
+
 .time-modifier-div{
     display: flex;
     flex-direction: column;
@@ -85,13 +96,51 @@
 
 
 @keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-5px); }
-    100% { transform: translateX(0); }
-  }
-  
-  .shake {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(5deg); }
+    50% { transform: rotate(-5deg); }
+    75% { transform: rotate(5deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.shake {
     animation: shake 0.5s linear infinite;
-  }
+}
+
+
+@media (min-width: 768px){
+    .session-h1{
+        font-size: 3rem;
+        padding: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .session-article{
+        padding: 4rem;
+        font-size: 1.5rem;
+        gap: 2rem;
+    }
+
+    .session-timer{
+        font-size: 3.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .break-article{
+        padding: 4rem;
+        font-size: 1.5rem;
+        gap: 2rem;
+    }
+
+    .session-btn{
+        padding: 1rem;
+        width: 5rem;
+        font-size: 1rem;
+    }
+
+    .skip-btn{
+        padding: 1rem;
+        width: 5rem;
+        font-size: 1rem;
+    }
+}

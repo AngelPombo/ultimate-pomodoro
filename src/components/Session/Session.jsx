@@ -25,7 +25,11 @@ function Session() {
 
   function resetTimer() {
     stopTimer();
-    setTime(1500);
+    if(finished){
+      setTime(300)
+    }else{
+      setTime(1500);
+    }
   }
 
   function aumTimer(){
@@ -34,6 +38,9 @@ function Session() {
 
   function dimTimer(){
     setTime(time - 60)
+    if(time < 60){
+      setTime(0)
+    }
   }
 
   useEffect(() => {
@@ -68,6 +75,16 @@ function Session() {
     return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
   }
 
+  function skipClick(){
+    stopTimer();
+    setFinished(!finished);
+    if(finished == false){
+      setTime(300)
+    }else{
+      setTime(1500);
+    }
+  }
+
   return (
     <section className='session-section'>
       <audio ref={audioRef} src={alarm} />
@@ -76,11 +93,13 @@ function Session() {
         ?
         <article className={`break-article ${shake ? 'shake break-article' : ''}`}>
           <h2>Time to Break!</h2>
-          <h4 className='session-timer'>{formatTime(time)}</h4>
-          <div className='btn-div'>
-              <button onClick={startTimer} className='session-btn'>Start</button>
-              <button onClick={stopTimer} className='session-btn'>Stop</button>
-              <button onClick={resetTimer} className='session-btn'>Reset</button>
+          <div className='session-div'>
+            <h4 className='session-timer'>{formatTime(time)}</h4>
+            <div className='btn-div'>
+                <button onClick={startTimer} className='session-btn'>Start</button>
+                <button onClick={stopTimer} className='session-btn'>Stop</button>
+                <button onClick={resetTimer} className='session-btn'>Reset</button>
+            </div>
           </div>
           <div className='time-modifier-div'>
             <h4>Break time modifier</h4>
@@ -89,6 +108,7 @@ function Session() {
               <button onClick={dimTimer} className='session-btn'>-</button>
             </div>
           </div>
+          <button className='skip-btn' onClick={skipClick}>Skip!</button>
         </article>
         :
         <article className={`session-article ${shake ? 'shake session-article' : ''}`}>
@@ -108,6 +128,7 @@ function Session() {
               <button onClick={dimTimer} className='session-btn'>-</button>
             </div>
           </div>
+          <button className='skip-btn' onClick={skipClick}>Skip!</button>
         </article>
       }
     </section>
